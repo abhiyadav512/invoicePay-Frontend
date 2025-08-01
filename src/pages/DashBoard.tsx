@@ -53,9 +53,9 @@ const DashBoard = () => {
     return viewMode === "month" ? "Filter by Month:" : "Filter by Date:";
   };
 
-   useEffect(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, []);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <div className="min-h-screen">
       <section className="flex flex-col p-4">

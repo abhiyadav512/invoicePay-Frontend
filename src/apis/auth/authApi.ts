@@ -9,7 +9,7 @@ import type {
 
 export const getUserProfile = async (): Promise<AuthResponse> => {
   const response = await axiosInstance.get("/user/auth/me");
-  return response.data;
+  return response.data.data;
 };
 
 export const loginUser = async (data: LoginInput): Promise<AuthResponse> => {

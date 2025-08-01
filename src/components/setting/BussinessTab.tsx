@@ -1,11 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Building2,
-  Mail,
-  Phone,
-  Save,
-  X,
-} from "lucide-react";
+import { useState, useEffect } from "react";
+import { Building2, Mail, Phone, Save, X } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
@@ -32,7 +26,12 @@ const BusinessTab = () => {
     isPending: isLoading,
     error: fetchError,
     isError: isFetchError,
-  } = useGetBusiness();
+  } = useGetBusiness() as {
+    data?: { data: BusinessData };
+    isPending: boolean;
+    error?: any;
+    isError: boolean;
+  };
 
   const { mutateAsync, isPending: isMutating } = useSetupBusiness();
 
@@ -98,17 +97,34 @@ const BusinessTab = () => {
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
-    if (isEditing) {
+    if (isEditing && businessData) {
       setFormData(businessData);
     }
   };
 
   const handleSubmit = () => {
+    // Ensure address and other fields are never null
+    const sanitizedFormData = {
+      ...formData,
+      address: formData.address ?? undefined,
+      city: formData.city ?? undefined,
+      state: formData.state ?? undefined,
+      website: formData.website ?? undefined,
+      postalCode: formData.postalCode ?? undefined,
+      logo: formData.logo ?? undefined,
+      businessType: formData.businessType ?? undefined,
+      description: formData.description ?? undefined,
+      country: formData.country ?? undefined,
+      email: formData.email ?? undefined,
+      name: formData.name ?? undefined,
+      number: formData.number ?? undefined,
+      taxId: formData.taxId ?? undefined,
+    };
     if (businessData) {
-      updateBusinessInfo(formData);
+      updateBusinessInfo(sanitizedFormData);
       setIsEditing(false);
     } else {
-      mutateAsync(formData);
+      mutateAsync(sanitizedFormData);
       setIsEditing(false);
     }
   };
@@ -261,7 +277,7 @@ const BusinessTab = () => {
                       id="address"
                       name="address"
                       className="h-11"
-                      value={formData.address}
+                      value={formData.address ?? ""}
                       onChange={handleChange}
                     />
                   </div>

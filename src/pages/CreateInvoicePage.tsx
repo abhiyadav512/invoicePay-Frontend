@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
@@ -16,10 +16,13 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import { Plus, Trash2, ArrowLeft } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import { useCreateInvoice } from "../apis/invoices/useInvoices";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+
+type ItemField = "description" | "quantity" | "amount";
+type Item = { description: string; quantity: number; amount: number };
 
 const CreateInvoicePage = () => {
   const createInvoiceMutation = useCreateInvoice();
@@ -32,7 +35,7 @@ const CreateInvoicePage = () => {
     notes: "",
   });
 
-  const [items, setItems] = useState([
+  const [items, setItems] = useState<Item[]>([
     { description: "", quantity: 1, amount: 0 },
   ]);
 
@@ -40,9 +43,13 @@ const CreateInvoicePage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const updateItemAmount = (index, field, value) => {
+  const updateItemAmount = (
+    index: number,
+    field: ItemField,
+    value: string | number
+  ) => {
     const updatedItems = [...items];
-    updatedItems[index][field] = value;
+    updatedItems[index][field] = value as never;
     setItems(updatedItems);
   };
 
@@ -50,7 +57,7 @@ const CreateInvoicePage = () => {
     setItems([...items, { description: "", quantity: 1, amount: 0 }]);
   };
 
-  const removeItem = (index) => {
+  const removeItem = (index: number) => {
     if (items.length > 1) {
       setItems(items.filter((_, i) => i !== index));
     }
@@ -75,8 +82,6 @@ const CreateInvoicePage = () => {
         items: validItems,
       };
 
-      console.log("Invoice Data:", invoiceData);
-
       const response = await createInvoiceMutation.mutateAsync(invoiceData);
       const invoiceId = response?.data?.id;
 
@@ -86,14 +91,13 @@ const CreateInvoicePage = () => {
       } else {
         throw new Error("Invoice ID not returned from server.");
       }
-      toast.success("Invoice created successfully!");
     } catch (error) {
       console.error("Error creating invoice:", error);
       toast.error("Failed to create invoice. Please try again.");
     }
   };
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
@@ -324,7 +328,7 @@ const CreateInvoicePage = () => {
               type="button"
               variant="outline"
               onClick={addItem}
-              className="w-full mt-4"
+              className="w-full mt-4 cursor-pointer"
             >
               <Plus className="h-4 w-4 mr-2" />
               Add Item
@@ -345,12 +349,16 @@ const CreateInvoicePage = () => {
         </Card>
 
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
-          <Button variant="outline" className="flex-1" type="button">
+          <Button
+            variant="outline"
+            className="flex-1 cursor-pointer"
+            type="button"
+          >
             Cancel
           </Button>
           <Button
             onClick={handleSubmit}
-            className="flex-1"
+            className="flex-1 cursor-pointer"
             disabled={createInvoiceMutation.isPending}
           >
             {createInvoiceMutation.isPending

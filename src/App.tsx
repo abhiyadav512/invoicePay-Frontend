@@ -1,4 +1,8 @@
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import AppLayout from "./layouts/AppLayout";
@@ -19,8 +23,11 @@ import BusinessTab from "./components/setting/BussinessTab";
 import Invoices from "./pages/Invoice";
 import BillingTab from "./components/setting/BillingTab";
 import NotificationTab from "./components/setting/NotificationTab";
-import SecurityTab from "./components/setting/securityTab";
+import SecurityTab from "./components/setting/SecurityTab";
 import CreateInvoicePage from "./pages/CreateInvoicePage";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import NotFoundPage from "./pages/NotFoundPage";
+
 
 const queryClient = new QueryClient();
 
@@ -46,16 +53,16 @@ const router = createBrowserRouter([
     element: <ResetPassword />,
   },
   {
+    path: "/payment-sucess",
+    element: <PaymentSuccess />,
+  },
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
     element: <AppLayout />,
     children: [
-      {
-        path: "/",
-        element: (
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        ),
-      },
       {
         path: "/dashboard",
         element: (
@@ -95,7 +102,6 @@ const router = createBrowserRouter([
             <Setting />
           </ProtectedRoute>
         ),
-
         children: [
           {
             index: true,
@@ -123,9 +129,22 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "*",
+        element: (
+          <ProtectedRoute>
+            <NotFoundPage />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
+  {
+    path: "*",
+    element: <NotFoundPage />,
+  },
 ]);
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>

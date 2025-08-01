@@ -5,8 +5,16 @@ import { Link } from "react-router-dom";
 import { ModeToggle } from "../theme/mode-toggle";
 import { useGetProfile } from "../../apis/auth/useAuth";
 
+type ProfileData = {
+  data?: {
+    name?: string;
+    email?: string;
+  };
+};
+
 export default function Navbar() {
-  const {data}=useGetProfile();
+  const { data } = useGetProfile() as ProfileData;
+  console.log(data);
   return (
     <nav>
       <div
@@ -33,13 +41,13 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <img
-            src="/vite.svg"
-            alt="Company logo"
-            className="h-9 w-9 object-contain"
+            src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1906669723.jpg"
+            alt="Dealdu logo"
+            className="h-9 w-9 object-contain rounded-full"
           />
           <div className="text-sm">
-            <p className="font-medium leading-none">{data?.data?.name}</p>
-            <p className="text-gray-500 text-xs">{data?.data?.email}</p>
+            <p className="font-medium leading-none">{data?.name}</p>
+            <p className="text-gray-500 text-xs">{data?.email}</p>
           </div>
         </div>
       </div>

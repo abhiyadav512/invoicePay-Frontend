@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   createInvoice,
   deleteInvoice,
@@ -15,7 +15,7 @@ export const useGetAlInvoices = (page: number, limit: number) => {
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
     retry: false,
-    keepPreviousData: true,
+    placeholderData: keepPreviousData,
   });
 };
 

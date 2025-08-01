@@ -31,7 +31,7 @@ const Setting = () => {
                   Manage your account and preferences
                 </p>
               </div>
-              <Button onClick={logout}>Logout</Button>
+              <Button onClick={logout} className="cursor-pointer">Logout</Button>
             </div>
 
             <div className="border-b border-gray-700">

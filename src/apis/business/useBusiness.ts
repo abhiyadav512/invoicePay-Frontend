@@ -9,21 +9,19 @@ export const useGetBusiness = () => {
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
     retry: false,
-    onError: (err: any) => {
-      toast.error(
-        err.response?.data?.message || "Could not fetch Business Profile"
-      );
-    },
   });
 };
 
 export const useSetupBusiness = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: setupBusiness,
     onSuccess: (response) => {
       toast.success(
         response.message || "Business profile created successfully."
       );
+      queryClient.invalidateQueries({ queryKey: ["businessProfile"] });
     },
     onError: (err: any) => {
       toast.error(
@@ -34,12 +32,12 @@ export const useSetupBusiness = () => {
 };
 
 export const useUpdateBusinessInfo = () => {
-  const queryClient=useQueryClient();
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: updateBusiness,
     onSuccess: () => {
       toast.success("Business updated successfully.");
-      queryClient.invalidateQueries({ queryKey: ["businessProfile"] }); 
+      queryClient.invalidateQueries({ queryKey: ["businessProfile"] });
     },
     onError: (err: any) => {
       toast.error(

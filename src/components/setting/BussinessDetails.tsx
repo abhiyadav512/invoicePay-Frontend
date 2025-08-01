@@ -1,20 +1,11 @@
-import React from "react";
-import {
-  Building2,
-  Mail,
-  Phone,
-  MapPin,
-  Hash,
-  Globe,
-  Edit,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Hash, Globe, Edit } from "lucide-react";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { CardContent } from "../ui/card";
 import type { BusinessData } from "./type";
 
 interface BusinessDetailsProps {
-  businessData: BusinessData;
+  businessData?: BusinessData;
   onEdit: () => void;
 }
 
@@ -66,10 +57,14 @@ const BusinessDetails: React.FC<BusinessDetailsProps> = ({
             <h4 className="text-lg font-semibold">Personal Information</h4>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InfoField label="Email" value={businessData?.email} icon={Mail} />
+            <InfoField
+              label="Email"
+              value={businessData?.email ?? ""}
+              icon={Mail}
+            />
             <InfoField
               label="Phone Number"
-              value={businessData?.number}
+              value={businessData?.number ?? ""}
               icon={Phone}
             />
           </div>
@@ -80,16 +75,20 @@ const BusinessDetails: React.FC<BusinessDetailsProps> = ({
             <h4 className="text-lg font-semibold">Business Details</h4>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InfoField label="Company Name" value={businessData?.name} />
+            <InfoField label="Company Name" value={businessData?.name ?? ""} />
             <InfoField
               label="Website"
-              value={businessData?.website}
+              value={businessData?.website ?? ""}
               icon={Globe}
             />
-            <InfoField label="Tax ID" value={businessData?.taxId} icon={Hash} />
+            <InfoField
+              label="Tax ID"
+              value={businessData?.taxId ?? ""}
+              icon={Hash}
+            />
             <InfoField
               label="Business Type"
-              value={businessData?.businessType}
+              value={businessData?.businessType ?? ""}
             />
           </div>
           {businessData?.description && (
@@ -109,14 +108,17 @@ const BusinessDetails: React.FC<BusinessDetailsProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <InfoField
               label="Street Address"
-              value={businessData?.address}
+              value={businessData?.address ?? ""}
               icon={MapPin}
             />
-            <InfoField label="City" value={businessData?.city} />
-            <InfoField label="State" value={businessData?.state} />
-            <InfoField label="Country" value={businessData?.country} />
+            <InfoField label="City" value={businessData?.city ?? ""} />
+            <InfoField label="State" value={businessData?.state ?? ""} />
+            <InfoField label="Country" value={businessData?.country ?? ""} />
             <div className="md:col-span-2">
-              <InfoField label="Postal Code" value={businessData?.postalCode} />
+              <InfoField
+                label="Postal Code"
+                value={businessData?.postalCode ?? ""}
+              />
             </div>
           </div>
         </div>

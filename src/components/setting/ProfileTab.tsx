@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Mail,
-  User,
-  Phone,
-  Save,
-  X,
-  CalendarIcon,
-  MapPin,
-} from "lucide-react";
+import { Mail, User, Phone, Save, X, CalendarIcon, MapPin } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
@@ -38,7 +30,7 @@ const ProfileTab = () => {
   ];
 
   const { data, isPending: isLoading, error, isError } = useGetProfile();
-  const userData = data?.data;
+  const userData = (data as { data?: UserProfile });
 
   const { mutateAsync: updateProfile, isPending: isUpdating } =
     useUpdateProfile();
@@ -66,14 +58,17 @@ const ProfileTab = () => {
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
-    if (isEditing) {
+    if (isEditing && userData) {
       setFormData(userData);
     }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateProfile(formData);
+    updateProfile({
+      ...formData,
+      dob: formData.dob ? formData.dob.toISOString() : "",
+    });
     setIsEditing(false);
   };
 
@@ -100,7 +95,9 @@ const ProfileTab = () => {
         {isLoading ? (
           <ProfileSkeleton />
         ) : !isEditing ? (
-          <ProfileDetails userData={userData} onEdit={handleEditToggle} />
+          userData ? (
+            <ProfileDetails userData={userData} onEdit={handleEditToggle} />
+          ) : null
         ) : (
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">

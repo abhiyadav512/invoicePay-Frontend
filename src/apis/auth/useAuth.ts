@@ -101,9 +101,6 @@ export const useGetProfile = () => {
     retry: 2,
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
-    onError: (err: any) => {
-      toast.error(err.response?.data?.message || "Could not fetch profile.");
-    },
   });
 };
 

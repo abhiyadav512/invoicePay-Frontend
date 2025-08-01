@@ -54,7 +54,7 @@ export const InvoiceCard = ({
               View
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => handleDelete(id)}
+              onClick={() => handleDelete(String(id))}
               className={`text-red-600 ${
                 isPending ? "opacity-50 pointer-events-none" : ""
               }`}

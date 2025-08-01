@@ -58,6 +58,10 @@ export interface SingleInvoiceResponse {
     dueDate: string;
     pdfUrl: string | null;
     paymentLink: string;
+    createdAt: string;
+    paymentMethod: string;
+    paidDate: string;
+    notes:string;
     business: {
       id: string;
       name: string;
@@ -68,6 +72,11 @@ export interface SingleInvoiceResponse {
       logo: string;
       state: string;
       postalCode: string;
+      paidDate: string;
+      stripeSessionId: string;
+      stripePaymentIntentId: string;
+      paymentMethod: string;
+      metadata: JSON;
       owner: {
         id: string;
         name: string;
@@ -92,7 +101,6 @@ export interface SingleInvoiceResponse {
   };
 }
 
-
 export interface InvoiceItemInput {
   description: string;
   amount: number;
@@ -102,7 +110,7 @@ export interface InvoiceItemInput {
 export interface CreateInvoiceInput {
   clientName: string;
   clientEmail: string;
-  currency?: string; 
-  dueDate: string ; 
+  currency?: string;
+  dueDate: string;
   items: InvoiceItemInput[];
 }

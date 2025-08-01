@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { Button } from "../../components/ui/button";
 import { Eye, EyeOff, Loader2, Mail, Lock, UserPlus, User } from "lucide-react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useRegister } from "../../apis/auth/useAuth";
 
 const Register = () => {
@@ -25,7 +25,6 @@ const Register = () => {
     e.preventDefault();
     registerUser.mutate(form);
   };
-
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -134,5 +133,3 @@ const Register = () => {
 };
 
 export default Register;
-
-

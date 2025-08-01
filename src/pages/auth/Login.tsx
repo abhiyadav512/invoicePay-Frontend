@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { Button } from "../../components/ui/button";
 import { Eye, EyeOff, Loader2, Mail, Lock, LogIn } from "lucide-react";
-import { FaGoogle } from "react-icons/fa";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLogin } from "../../apis/auth/useAuth";
 
 const Login = () => {
@@ -25,10 +24,10 @@ const Login = () => {
     e.preventDefault();
     loginuser.mutate(form);
   };
-  
-  const handleGoogleLogin = () => {
-    alert("Google Sign-in not implemented yet!");
-  };
+
+  // const handleGoogleLogin = () => {
+  //   alert("Google Sign-in not implemented yet!");
+  // };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -117,13 +116,13 @@ const Login = () => {
           </Button>
         </form>
 
-        <div className="flex items-center justify-center space-x-2 text-muted-foreground text-xs">
+        {/* <div className="flex items-center justify-center space-x-2 text-muted-foreground text-xs">
           <span className="w-full h-px bg-border" />
           <span>OR</span>
           <span className="w-full h-px bg-border" />
-        </div>
+        </div> */}
 
-        <Button
+        {/* <Button
           type="button"
           variant="outline"
           onClick={handleGoogleLogin}
@@ -131,7 +130,7 @@ const Login = () => {
         >
           <FaGoogle className="mr-2 h-4 w-4" />
           Sign in with Google
-        </Button>
+        </Button> */}
 
         <p className="text-center text-sm text-muted-foreground">
           Don’t have an account?{" "}

@@ -3,6 +3,7 @@ import MobileNav from "../components/Header/MobileNav";
 import Footer from "../components/Footer";
 import Navbar from "../components/Header/Navbar";
 import DesktopNav from "../components/Header/DesktopNav";
+import { Analytics } from "@vercel/analytics/react";
 
 const AppLayout = () => {
   return (
@@ -11,7 +12,8 @@ const AppLayout = () => {
       <div className="md:ml-72 flex-1 flex flex-col">
         <Navbar />
         <main className="flex-1">
-          <Outlet/>
+          <Outlet />
+          <Analytics />
         </main>
         <Footer />
       </div>

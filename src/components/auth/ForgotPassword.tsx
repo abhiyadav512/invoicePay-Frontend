@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
@@ -29,9 +29,7 @@ const ForgotPassword = () => {
           </div>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-semibold ">
-          Forgot Password
-        </h2>
+        <h2 className="text-2xl sm:text-3xl font-semibold ">Forgot Password</h2>
         <p className="text-sm sm:text-base text-gray-400 mt-2">
           Enter your registered email to receive a reset code.
         </p>

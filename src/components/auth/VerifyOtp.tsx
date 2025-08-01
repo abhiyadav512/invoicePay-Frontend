@@ -32,7 +32,7 @@ const VerifyOtp = () => {
   };
 
   if (!email) {
-    return null; 
+    return null;
   }
 
   return (

@@ -1,6 +1,6 @@
-import React from "react";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 import { Button } from "../ui/button";
+import { Fragment } from "react/jsx-runtime";
 
 interface PaginationProps {
   currentPage: number;
@@ -87,7 +87,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 
         <div className="flex items-center gap-1">
           {visiblePages.map((page, index) => (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               {page === "..." ? (
                 <div className="flex items-center justify-center w-8 h-8">
                   <MoreHorizontal className="w-4 h-4 text-muted-foreground" />
@@ -103,7 +103,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                   {page}
                 </Button>
               )}
-            </React.Fragment>
+            </Fragment>
           ))}
         </div>
 

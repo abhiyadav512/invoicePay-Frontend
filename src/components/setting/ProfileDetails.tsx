@@ -1,4 +1,3 @@
-import React from "react";
 import { Mail, User, Phone, Edit, Calendar1, MapPin } from "lucide-react";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";

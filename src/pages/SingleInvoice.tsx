@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { useGetInvoiceById } from "../apis/invoices/useInvoices";
 import { format } from "date-fns";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 type InvoiceStatus = "PAID" | "UNPAID" | "OVERDUE";
 
@@ -18,10 +19,45 @@ const SingleInvoice = () => {
     error,
   } = useGetInvoiceById(invoiceId!);
 
-  const handleDownload = () => {
-    console.log("Download PDF for invoice:", invoiceId);
-  };
+  console.log(SingleInvoice);
 
+  const handleDownload = async () => {
+    const pdfUrl = SingleInvoice?.data?.pdfUrl;
+    if (!pdfUrl) {
+      toast.error(
+        "PDF nahi mila... Cloudinary bola: 'Bhaiya free plan khatam, ab premium lo!' 💸"
+      );
+      return;
+    }
+
+    try {
+      // Fetch the PDF file
+      const response = await fetch(pdfUrl);
+      if (!response.ok) throw new Error("Failed to fetch PDF");
+
+      // Convert to blob
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      // Create download link
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = `Invoice_${
+        SingleInvoice?.data?.formattedInvoiceNumber || SingleInvoice?.data.id
+      }.pdf`;
+      link.style.display = "none";
+
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+
+      // Cleanup
+      window.URL.revokeObjectURL(blobUrl);
+      document.body.removeChild(link);
+    } catch {
+      toast.error("Download failed:");
+    }
+  };
   const formatDate = (
     dateValue: string | Date | null | undefined,
     formatString = "MMM d, yyyy"
@@ -58,22 +94,6 @@ const SingleInvoice = () => {
           variant: "secondary" as const,
           className: "bg-gray-100 text-gray-800 hover:bg-gray-100",
         };
-    }
-  };
-
-  const getPaidDateDisplay = (
-    status: InvoiceStatus,
-    paidDate?: string | Date | null
-  ) => {
-    switch (status) {
-      case "PAID":
-        return formatDate(paidDate) || "Payment Confirmed";
-      case "UNPAID":
-        return "Not Paid Yet";
-      case "OVERDUE":
-        return "Overdue";
-      default:
-        return "N/A";
     }
   };
 
@@ -126,6 +146,7 @@ const SingleInvoice = () => {
   }
 
   const invoice = SingleInvoice.data;
+  console.log(invoice);
   const status = invoice.status as InvoiceStatus;
   const statusStyles = getStatusStyles(status);
 
@@ -235,7 +256,7 @@ const SingleInvoice = () => {
                       Issue Date
                     </p>
                     <p className="text-lg font-semibold text-foreground">
-                      {formatDate(invoice.issueDate)}
+                      {formatDate(invoice.createdAt)}
                     </p>
                   </div>
                   <div>
@@ -254,7 +275,7 @@ const SingleInvoice = () => {
                       variant={statusStyles.variant}
                       className={`${statusStyles.className} text-sm font-semibold`}
                     >
-                      {getPaidDateDisplay(status, invoice.paidDate)}
+                      {invoice.status}
                     </Badge>
                   </div>
                 </div>
