@@ -9,7 +9,7 @@ import type {
 
 export const getUserProfile = async (): Promise<AuthResponse> => {
   const response = await axiosInstance.get("/user/auth/me");
-  return response.data.data;
+  return response.data;
 };
 
 export const loginUser = async (data: LoginInput): Promise<AuthResponse> => {
@@ -45,7 +45,7 @@ export const forgotPassword = async (email: string): Promise<AuthResponse> => {
 
 export const resetPassword = async (data: {
   newPassword: string;
-  token: String;
+  token: string;
 }): Promise<AuthResponse> => {
   const response = await axiosInstance.post(
     `/user/auth/reset-password/${data.token}`,

@@ -30,7 +30,7 @@ const ProfileTab = () => {
   ];
 
   const { data, isPending: isLoading, error, isError } = useGetProfile();
-  const userData = (data as { data?: UserProfile });
+  const userData = (data as { data?: UserProfile })?.data;
 
   const { mutateAsync: updateProfile, isPending: isUpdating } =
     useUpdateProfile();

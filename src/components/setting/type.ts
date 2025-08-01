@@ -16,11 +16,14 @@ export type BusinessData = {
 };
 
 export type UserProfile = {
+  id?: string;
   email: string;
   name: string;
-  number: string;
-  location: string;
-  dob: Date | undefined;
+  number?: string;
+  location?: string;
+  dob?: Date;
 };
 
-
+export type User = UserProfile & {
+  id: string;
+};

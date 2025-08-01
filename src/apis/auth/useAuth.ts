@@ -20,9 +20,18 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: loginUser,
     onSuccess: (response) => {
-      if (response?.data?.user) {
-        auth.login(response.data.user);
-        // console.log(response.data.user);
+      const user = response?.data;
+
+      if (user?.email && user?.id) {
+        auth.login({
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          number: user.number ??"",
+          location: user.location ?? "",
+          dob: user.dob ? new Date(user.dob) : undefined,
+        });
+
         toast.success("Login successful!");
         queryClient.invalidateQueries({ queryKey: ["userProfile"] });
         navigate("/dashboard");
@@ -30,6 +39,7 @@ export const useLogin = () => {
         toast.error("Login failed. User data missing.");
       }
     },
+
     onError: (err: any) => {
       // console.error("Login error:", err);
       toast.error(err.response?.data?.message || "Login failed. Try again.");
@@ -105,7 +115,7 @@ export const useGetProfile = () => {
 };
 
 export const useUpdateProfile = () => {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: updateUserProfile,

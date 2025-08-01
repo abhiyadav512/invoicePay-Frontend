@@ -62,7 +62,7 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({
             <div className="md:col-span-2">
               <InfoField
                 label="Phone Number"
-                value={userData?.number}
+                value={userData?.number??""}
                 icon={Phone}
               />
             </div>
@@ -75,7 +75,7 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({
             />
             <InfoField
               label="Location"
-              value={userData?.location}
+              value={userData?.location??""}
               icon={MapPin}
             />
           </div>

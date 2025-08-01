@@ -6,6 +6,9 @@ interface User {
   id: string;
   name: string;
   email: string;
+  number?: string;
+  location?: string;
+  dob?: Date;
 }
 
 interface AuthContextType {
@@ -133,4 +136,5 @@ const useAuth = () => {
   return context;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { AuthProvider, useAuth };

@@ -14,7 +14,6 @@ type ProfileData = {
 
 export default function Navbar() {
   const { data } = useGetProfile() as ProfileData;
-  console.log(data);
   return (
     <nav>
       <div

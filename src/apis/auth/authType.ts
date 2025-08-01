@@ -1,3 +1,5 @@
+import type { UserProfile } from "../../components/setting/type";
+
 export interface LoginInput {
   email: string;
   password: string;
@@ -10,25 +12,17 @@ export interface RegisterInput {
 }
 
 export interface updateInput {
+  email: string;
   name: string;
+  number?: string;
+  location?: string;
   dob: string;
-  location: string;
 }
 
 export interface AuthResponse {
   success: boolean;
   message: string;
-  data?: {
-    email?: string;
-    user?: {
-      id: string;
-      name: string;
-      email: string;
-      location: string;
-      dob: string;
-      number: string;
-    };
-  };
+  data: UserProfile;
 }
 
 export interface VerifyOtpInput {
