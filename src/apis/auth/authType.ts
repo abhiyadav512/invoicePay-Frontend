@@ -16,14 +16,22 @@ export interface updateInput {
   name: string;
   number?: string;
   location?: string;
-  dob: string;
+  dob?: string;
 }
 
-export interface AuthResponse {
+export type AuthResponse<T> = {
+  success: boolean;
+  message: string;
+  data: {
+    user: T;
+  };
+};
+
+export interface AuthResponseProfile {
   success: boolean;
   message: string;
   data: UserProfile;
-}
+};
 
 export interface VerifyOtpInput {
   email: string;

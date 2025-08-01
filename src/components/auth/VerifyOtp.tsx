@@ -40,11 +40,11 @@ const VerifyOtp = () => {
       <div className="w-full max-w-sm sm:max-w-md   sm:p-8 text-center">
         <div className="flex justify-center mb-3">
           <div className="  p-2.5 sm:p-3">
-            <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6 text-black" />
+            <ShieldCheck className="h-5 w-5 sm:h-6 sm:w-6" />
           </div>
         </div>
 
-        <h2 className="text-xl sm:text-2xl font-semibold text-gray-900">
+        <h2 className="text-xl sm:text-2xl font-semibold">
           Verify Your Account
         </h2>
         <p className="text-xs sm:text-sm text-gray-600 mt-1">

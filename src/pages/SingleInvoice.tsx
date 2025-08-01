@@ -19,7 +19,7 @@ const SingleInvoice = () => {
     error,
   } = useGetInvoiceById(invoiceId!);
 
-  console.log(SingleInvoice);
+  // console.log(SingleInvoice);
 
   const handleDownload = async () => {
     const pdfUrl = SingleInvoice?.data?.pdfUrl;
@@ -146,7 +146,7 @@ const SingleInvoice = () => {
   }
 
   const invoice = SingleInvoice.data;
-  console.log(invoice);
+  // console.log(invoice);
   const status = invoice.status as InvoiceStatus;
   const statusStyles = getStatusStyles(status);
 

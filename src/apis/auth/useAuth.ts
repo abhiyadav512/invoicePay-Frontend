@@ -20,14 +20,14 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: loginUser,
     onSuccess: (response) => {
-      const user = response?.data;
+      const user = response?.data?.user;
 
       if (user?.email && user?.id) {
         auth.login({
           id: user.id,
           email: user.email,
           name: user.name,
-          number: user.number ??"",
+          number: user.number ?? "",
           location: user.location ?? "",
           dob: user.dob ? new Date(user.dob) : undefined,
         });

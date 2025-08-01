@@ -19,9 +19,11 @@ export type UserProfile = {
   id?: string;
   email: string;
   name: string;
-  number?: string;
-  location?: string;
-  dob?: Date;
+  number: string;
+  location: string;
+  dob: Date;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export type User = UserProfile & {

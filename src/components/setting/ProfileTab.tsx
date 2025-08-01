@@ -18,6 +18,8 @@ import {
 } from "../ui/select";
 import { ProfileSkeleton } from "./skeleton/ProfileSkeleton";
 import ProfileDetails from "./ProfileDetails";
+import type { AuthResponseProfile } from "../../apis/auth/authType";
+import { toast } from "sonner";
 
 const ProfileTab = () => {
   const CITIES = [
@@ -30,7 +32,8 @@ const ProfileTab = () => {
   ];
 
   const { data, isPending: isLoading, error, isError } = useGetProfile();
-  const userData = (data as { data?: UserProfile })?.data;
+  const res = data as AuthResponseProfile;
+  const userData = res.data;
 
   const { mutateAsync: updateProfile, isPending: isUpdating } =
     useUpdateProfile();
@@ -40,12 +43,13 @@ const ProfileTab = () => {
     name: "",
     number: "",
     location: "",
-    dob: undefined,
+    dob: new Date(),
   });
 
   const [isEditing, setIsEditing] = useState(false);
 
   React.useEffect(() => {
+    console.log(userData);
     if (userData) {
       setFormData(userData);
     }
@@ -63,14 +67,28 @@ const ProfileTab = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    updateProfile({
-      ...formData,
-      dob: formData.dob ? formData.dob.toISOString() : "",
-    });
-    setIsEditing(false);
-  };
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault(); 
+  if (
+    !formData.email ||
+    !formData.name ||
+    !formData.number ||
+    !formData.dob ||
+    !formData.location
+  ) {
+    toast.error(
+      "Please fill all required fields including Date of Birth and Location."
+    );
+    return; 
+  }
+
+  updateProfile({
+    ...formData,
+    dob: formData.dob ? formData.dob.toISOString() : "",
+  });
+
+  setIsEditing(false);
+};
 
   return (
     <div className="bg-sidebar space-y-6 border rounded-xl">
@@ -158,6 +176,7 @@ const ProfileTab = () => {
                         className="pl-10 h-11"
                         value={formData.number}
                         onChange={handleChange}
+                        required
                       />
                       <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     </div>
@@ -187,6 +206,7 @@ const ProfileTab = () => {
                       <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
                           mode="single"
+                          required
                           selected={formData.dob}
                           onSelect={(date) =>
                             setFormData((prev) => ({

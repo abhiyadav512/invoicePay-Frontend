@@ -43,7 +43,6 @@ const BusinessTab = () => {
 
   const STATES = [
     "Maharashtra",
-    "Delhi",
     "Karnataka",
     "Tamil Nadu",
     "Gujarat",
