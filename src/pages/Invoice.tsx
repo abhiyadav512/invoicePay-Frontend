@@ -145,11 +145,11 @@ const Invoices = () => {
             </>
           ) : isErrorInvoiceData ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
-              <div className="text-red-600 rounded-lg p-6 max-w-md">
-                <h3 className="text-lg font-semibold mb-2">
+              <div className="rounded-lg p-6 max-w-md">
+                <h3 className=" text-red-600  text-lg font-semibold mb-2">
                   Failed to load invoices
                 </h3>
-                <p className="text-sm mb-4">
+                <p className="text-sm mb-4 text-red-600 ">
                   {(() => {
                     if (
                       invoiceDataError &&
@@ -157,14 +157,16 @@ const Invoices = () => {
                       "response" in invoiceDataError &&
                       (invoiceDataError as any).response?.data?.message
                     ) {
-                      return (invoiceDataError as any).response.data.message;
+                      return (invoiceDataError as any).response?.data?.message;
                     }
                     return "Something went wrong while loading your invoices.";
                   })()}
                 </p>
-                <Button variant="outline" size="sm" onClick={handleRefresh}>
-                  Try Again
-                </Button>
+                <Link to={"/setting/business"}>
+                  <Button variant="outline" size="sm">
+                    Create Business
+                  </Button>
+                </Link>
               </div>
             </div>
           ) : !Array.isArray(filteredInvoices) ||

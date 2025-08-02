@@ -38,7 +38,14 @@ const RecentInvoicesCard = () => {
                 <InvoiceCardSkeleton key={i} />
               ))
             ) : invoices.length === 0 ? (
-              <p className="text-center text-gray-500">No recent invoices.</p>
+              <div className="flex justify-between py-2 px-10">
+                <p className="text-center text-gray-500">No recent invoices.</p>
+                <Link to={"/setting/business"}>
+                  <Button variant="outline" size="sm">
+                    Create Business
+                  </Button>
+                </Link>
+              </div>
             ) : (
               invoices.map((invoice: Invoice) => (
                 <li

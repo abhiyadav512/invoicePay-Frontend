@@ -32,12 +32,14 @@ export const InvoiceCard = ({
       onSuccess: () => {
         toast.success("Invoice deleted successfully.");
       },
-      onError: () => {
-        toast.error("Failed to delete invoice. Please try again.");
+      onError: (error: any) => {
+        toast.error(
+          error?.response?.data?.message ||
+            "Failed to delete invoice. Please try again."
+        );
       },
     });
   };
-
 
   return (
     <>

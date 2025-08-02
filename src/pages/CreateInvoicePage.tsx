@@ -66,6 +66,30 @@ const CreateInvoicePage = () => {
   const total = items.reduce((sum, item) => sum + item.amount, 0);
 
   const handleSubmit = async () => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(formData.clientEmail)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    const today = new Date();
+    const dueDate = new Date(formData.dueDate);
+    if (!formData.dueDate || dueDate < new Date(today.toDateString())) {
+      toast.error("Due date cannot be in the past.");
+      return;
+    }
+
+    const validItems = items.filter(
+      (item) => item.description.trim() && item.quantity > 0 && item.amount > 0
+    );
+
+    if (validItems.length === 0) {
+      toast.error(
+        "Add at least one valid item with positive quantity and amount."
+      );
+      return;
+    }
+
     try {
       const validItems = items.filter(
         (item) =>
@@ -91,9 +115,11 @@ const CreateInvoicePage = () => {
       } else {
         throw new Error("Invoice ID not returned from server.");
       }
-    } catch (error) {
-      console.error("Error creating invoice:", error);
-      toast.error("Failed to create invoice. Please try again.");
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data?.message ||
+          "Failed to create invoice. Please try again."
+      );
     }
   };
 

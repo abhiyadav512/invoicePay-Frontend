@@ -64,7 +64,7 @@ const BusinessDetails: React.FC<BusinessDetailsProps> = ({
             />
             <InfoField
               label="Phone Number"
-              value={businessData?.number ?? ""}
+              value={businessData?.phone ?? ""}
               icon={Phone}
             />
           </div>

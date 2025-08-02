@@ -1,7 +1,7 @@
 export type BusinessData = {
   email: string;
   name: string;
-  number: string;
+  phone: string;
   address: string | null;
   taxId: string;
   city: string;

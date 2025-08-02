@@ -49,7 +49,7 @@ const ProfileTab = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   React.useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
     if (userData) {
       setFormData(userData);
     }
@@ -67,28 +67,44 @@ const ProfileTab = () => {
     }
   };
 
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault(); 
-  if (
-    !formData.email ||
-    !formData.name ||
-    !formData.number ||
-    !formData.dob ||
-    !formData.location
-  ) {
-    toast.error(
-      "Please fill all required fields including Date of Birth and Location."
-    );
-    return; 
-  }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email || !emailPattern.test(formData.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
 
-  updateProfile({
-    ...formData,
-    dob: formData.dob ? formData.dob.toISOString() : "",
-  });
+    if (!formData.name.trim()) {
+      toast.error("Full name is required.");
+      return;
+    }
 
-  setIsEditing(false);
-};
+    const phonePattern = /^\d{10}$/;
+    if (!phonePattern.test(formData.number)) {
+      toast.error("Phone number must be exactly 10 digits.");
+      return;
+    }
+
+    // Date of Birth Validation
+    if (!formData.dob || formData.dob > new Date()) {
+      toast.error("Please select a valid birth date.");
+      return;
+    }
+
+    // Location Validation
+    if (!formData.location) {
+      toast.error("Please select your city.");
+      return;
+    }
+
+    updateProfile({
+      ...formData,
+      dob: formData.dob ? formData.dob.toISOString() : "",
+    });
+
+    setIsEditing(false);
+  };
 
   return (
     <div className="bg-sidebar space-y-6 border rounded-xl">

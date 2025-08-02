@@ -15,7 +15,7 @@ export default defineConfig({
     proxy: {
       // Proxy API calls to backend
       "/api": {
-        target: "http://localhost:3000/api", // or your actual backend URL
+        target: "https://invoicepay-backend-traq.onrender.com/api",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

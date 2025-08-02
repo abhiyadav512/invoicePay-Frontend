@@ -19,6 +19,7 @@ import {
 } from "../../apis/business/useBusiness";
 import { BusinessFormSkeleton } from "./skeleton/BusinessFormSkeleton";
 import BusinessDetails from "./BussinessDetails";
+import { toast } from "sonner";
 
 const BusinessTab = () => {
   const {
@@ -68,7 +69,7 @@ const BusinessTab = () => {
   const [formData, setFormData] = useState<BusinessData>({
     email: "",
     name: "",
-    number: "",
+    phone: "",
     address: "",
     taxId: "",
     city: "",
@@ -102,7 +103,24 @@ const BusinessTab = () => {
   };
 
   const handleSubmit = () => {
-    // Ensure address and other fields are never null
+    const phonePattern = /^\d{10}$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const postalCodePattern = /^\d{5,6}$/; 
+    if (!phonePattern.test(formData.phone)) {
+      toast.error("Phone number must be exactly 10 digits.");
+      return;
+    }
+
+    if (!emailPattern.test(formData.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    if (!postalCodePattern.test(formData.postalCode || "")) {
+      toast.error("Postal code must be 5 or 6 digits.");
+      return;
+    }
+
     const sanitizedFormData = {
       ...formData,
       address: formData.address ?? undefined,
@@ -116,7 +134,7 @@ const BusinessTab = () => {
       country: formData.country ?? undefined,
       email: formData.email ?? undefined,
       name: formData.name ?? undefined,
-      number: formData.number ?? undefined,
+      phone: formData.phone ?? undefined,
       taxId: formData.taxId ?? undefined,
     };
     if (businessData) {
@@ -187,15 +205,21 @@ const BusinessTab = () => {
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="number">Phone Number</Label>
+                    <Label htmlFor="phone">Phone Number</Label>
                     <div className="relative mt-1">
                       <Input
-                        id="number"
-                        name="number"
+                        id="phone"
+                        name="phone"
                         type="tel"
                         className="pl-10 h-11"
-                        value={formData.number}
-                        onChange={handleChange}
+                        value={formData.phone}
+                        onChange={(e) => {
+                          const onlyDigits = e.target.value.replace(/\D/g, "");
+                          setFormData((prev) => ({
+                            ...prev,
+                            phone: onlyDigits,
+                          }));
+                        }}
                       />
                       <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     </div>

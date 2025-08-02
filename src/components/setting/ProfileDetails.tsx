@@ -13,7 +13,7 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({
   userData,
   onEdit,
 }) => {
-  console.log("data  ",userData);
+  // console.log("data  ",userData);
   const InfoField = ({
     label,
     value,
