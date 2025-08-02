@@ -20,6 +20,7 @@ import {
 import { BusinessFormSkeleton } from "./skeleton/BusinessFormSkeleton";
 import BusinessDetails from "./BussinessDetails";
 import { toast } from "sonner";
+import { BUSINESS_TYPES, CITIES, STATES } from "../../constants/formOption";
 
 const BusinessTab = () => {
   const {
@@ -42,29 +43,7 @@ const BusinessTab = () => {
   const isProcessing = isMutating || isPendingUpdate;
   const businessData = BusinessProfileData?.data;
 
-  const STATES = [
-    "Maharashtra",
-    "Karnataka",
-    "Tamil Nadu",
-    "Gujarat",
-    "Rajasthan",
-  ];
-  const CITIES = [
-    "Mumbai",
-    "Delhi",
-    "Bangalore",
-    "Chennai",
-    "Ahmedabad",
-    "Jaipur",
-  ];
-  const COUNTRIES = ["India", "USA", "UK", "Canada", "Germany"];
-  const BUSINESS_TYPES = [
-    "Retail",
-    "Service",
-    "Manufacturing",
-    "Software",
-    "Other",
-  ];
+  const COUNTRIES = ["India"];
 
   const [formData, setFormData] = useState<BusinessData>({
     email: "",
@@ -105,7 +84,7 @@ const BusinessTab = () => {
   const handleSubmit = () => {
     const phonePattern = /^\d{10}$/;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const postalCodePattern = /^\d{5,6}$/; 
+    const postalCodePattern = /^\d{5,6}$/;
     if (!phonePattern.test(formData.phone)) {
       toast.error("Phone number must be exactly 10 digits.");
       return;

@@ -20,17 +20,9 @@ import { ProfileSkeleton } from "./skeleton/ProfileSkeleton";
 import ProfileDetails from "./ProfileDetails";
 import type { AuthResponseProfile } from "../../apis/auth/authType";
 import { toast } from "sonner";
+import { CITIES } from "../../constants/formOption";
 
 const ProfileTab = () => {
-  const CITIES = [
-    "Mumbai",
-    "Delhi",
-    "Bangalore",
-    "Chennai",
-    "Ahmedabad",
-    "Jaipur",
-  ];
-
   const { data, isPending: isLoading, error, isError } = useGetProfile();
   const res = data as AuthResponseProfile;
   const userData = res.data;
