@@ -23,9 +23,15 @@ import { toast } from "sonner";
 import { CITIES } from "../../constants/formOption";
 
 const ProfileTab = () => {
-  const { data, isPending: isLoading, error, isError } = useGetProfile();
+  const {
+    data,
+    isPending: isLoading,
+    error,
+    isError,
+    refetch,
+  } = useGetProfile();
   const res = data as AuthResponseProfile;
-  const userData = res.data;
+  const userData = res?.data;
 
   const { mutateAsync: updateProfile, isPending: isUpdating } =
     useUpdateProfile();
@@ -40,10 +46,38 @@ const ProfileTab = () => {
 
   const [isEditing, setIsEditing] = useState(false);
 
+  const parseDate = (dateValue: any): Date => {
+    if (!dateValue) return new Date();
+    if (dateValue instanceof Date) return dateValue;
+    if (typeof dateValue === "string") {
+      const parsed = new Date(dateValue);
+      return isNaN(parsed.getTime()) ? new Date() : parsed;
+    }
+    return new Date();
+  };
+
+  const formatDateForAPI = (date: any): string => {
+    if (!date) return "";
+
+    let dateObj: Date;
+    if (date instanceof Date) {
+      dateObj = date;
+    } else if (typeof date === "string") {
+      dateObj = new Date(date);
+    } else {
+      return "";
+    }
+
+    return isNaN(dateObj.getTime()) ? "" : dateObj.toISOString();
+  };
+
   React.useEffect(() => {
-    // console.log(userData);
+    console.log("UserData updated:", userData);
     if (userData) {
-      setFormData(userData);
+      setFormData({
+        ...userData,
+        dob: parseDate(userData.dob), 
+      });
     }
   }, [userData]);
 
@@ -55,12 +89,16 @@ const ProfileTab = () => {
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
     if (isEditing && userData) {
-      setFormData(userData);
+      setFormData({
+        ...userData,
+        dob: parseDate(userData.dob),
+      });
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email || !emailPattern.test(formData.email)) {
       toast.error("Please enter a valid email address.");
@@ -90,12 +128,21 @@ const ProfileTab = () => {
       return;
     }
 
-    updateProfile({
-      ...formData,
-      dob: formData.dob ? formData.dob.toISOString() : "",
-    });
+    try {
+      await updateProfile({
+        ...formData,
+        dob: formatDateForAPI(formData.dob), 
+      });
 
-    setIsEditing(false);
+      toast.success("Profile updated successfully!");
+
+      await refetch();
+
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Profile update error:", error);
+      toast.error("Failed to update profile. Please try again.");
+    }
   };
 
   return (
