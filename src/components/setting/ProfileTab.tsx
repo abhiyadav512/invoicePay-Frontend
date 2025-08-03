@@ -140,7 +140,7 @@ const ProfileTab = () => {
 
       setIsEditing(false);
     } catch (error) {
-      console.error("Profile update error:", error);
+      // console.error("Profile update error:", error);
       toast.error("Failed to update profile. Please try again.");
     }
   };

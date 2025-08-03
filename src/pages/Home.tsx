@@ -40,37 +40,37 @@ const Home = () => {
 
   const features = [
     {
-      icon: <FileText className="h-8 w-8 text-[oklch(0.488_0.243_264.376)]" />,
+      icon: <FileText className="h-8 w-8 text-chart-1" />,
       title: "Smart Invoice Creation",
       description:
         "Create professional invoices in seconds with our intuitive interface and customizable templates.",
     },
     {
-      icon: <DollarSign className="h-8 w-8 text-[oklch(0.696_0.17_162.48)]" />,
+      icon: <DollarSign className="h-8 w-8 text-chart-2" />,
       title: "Payment Tracking",
       description:
         "Monitor payment status, send reminders, and get paid faster with integrated payment solutions.",
     },
     {
-      icon: <BarChart3 className="h-8 w-8 text-[oklch(0.769_0.188_70.08)]" />,
+      icon: <BarChart3 className="h-8 w-8 text-chart-3" />,
       title: "Analytics & Reports",
       description:
         "Gain insights into your business with detailed analytics and comprehensive financial reports.",
     },
     {
-      icon: <Users className="h-8 w-8 text-[oklch(0.627_0.265_303.9)]" />,
+      icon: <Users className="h-8 w-8 text-chart-4" />,
       title: "Client Management",
       description:
         "Organize client information, track payment history, and build stronger business relationships.",
     },
     {
-      icon: <Shield className="h-8 w-8 text-[oklch(0.704_0.191_22.216)]" />,
+      icon: <Shield className="h-8 w-8 text-chart-5" />,
       title: "Secure & Compliant",
       description:
         "Your data is protected with enterprise-grade security and compliance with industry standards.",
     },
     {
-      icon: <Zap className="h-8 w-8 text-[oklch(0.645_0.246_16.439)]" />,
+      icon: <Zap className="h-8 w-8 text-chart-1" />,
       title: "Automation Tools",
       description:
         "Automate recurring invoices, payment reminders, and follow-ups to save time and effort.",
@@ -102,17 +102,17 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[oklch(0.205_0_0)]">
-      <nav className="bg-[oklch(0.205_0_0)]/80 backdrop-blur-md border-b border-[oklch(1_0_0/0.1)] sticky top-0 z-50">
+    <div className="min-h-screen bg-sidebar">
+      <nav className="bg-card/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <div className="flex items-center space-x-2">
                   <div className="flex gap-2 items-center">
-                    <Receipt className="w-6 h-6 -rotate-20" />
+                    <Receipt className="w-6 h-6 -rotate-20 text-foreground" />
                   </div>
-                  <span className="text-xl font-bold text-[oklch(0.985_0_0)]">
+                  <span className="text-xl font-bold text-foreground">
                     InvoicePay
                   </span>
                 </div>
@@ -121,13 +121,13 @@ const Home = () => {
                 <div className="flex items-baseline space-x-4">
                   <a
                     href="#features"
-                    className="text-[oklch(0.708_0_0)] hover:text-[oklch(0.985_0_0)] px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors"
                   >
                     Features
                   </a>
                   <a
                     href="#testimonials"
-                    className="text-[oklch(0.708_0_0)] hover:text-[oklch(0.985_0_0)] px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors"
                   >
                     Reviews
                   </a>
@@ -162,16 +162,16 @@ const Home = () => {
 
         {mobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[oklch(0.205_0_0)] border-t border-[oklch(1_0_0/0.1)]">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-card border-t border-border">
               <a
                 href="#features"
-                className="text-[oklch(0.708_0_0)] hover:text-[oklch(0.985_0_0)] block px-3 py-2 rounded-md text-base font-medium"
+                className="text-muted-foreground hover:text-foreground block px-3 py-2 rounded-md text-base font-medium"
               >
                 Features
               </a>
               <a
                 href="#testimonials"
-                className="text-[oklch(0.708_0_0)] hover:text-[oklch(0.985_0_0)] block px-3 py-2 rounded-md text-base font-medium"
+                className="text-muted-foreground hover:text-foreground block px-3 py-2 rounded-md text-base font-medium"
               >
                 Reviews
               </a>
@@ -189,15 +189,15 @@ const Home = () => {
                   <Zap className="w-3 h-3 mr-1" />
                   New: AI-Powered Invoice Templates
                 </Badge>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[oklch(0.985_0_0)] leading-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                   Invoice Management
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[oklch(0.488_0.243_264.376)] to-[oklch(0.627_0.265_303.9)]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-chart-1 to-chart-4">
                     {" "}
                     Made Simple
                   </span>
                 </h1>
               </div>
-              <p className="text-xl text-[oklch(0.708_0_0)] mb-8 leading-relaxed">
+              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
                 Create professional invoices, track payments, and grow your
                 business with our comprehensive invoicing platform. Join
                 thousands of businesses who trust us with their billing.
@@ -218,21 +218,21 @@ const Home = () => {
                   <a href="/dashboard">View Demo</a>
                 </Button>
               </div>
-              <div className="flex items-center space-x-6 text-sm text-[oklch(0.708_0_0)]">
+              <div className="flex items-center space-x-6 text-sm text-muted-foreground">
                 <div className="flex items-center">
-                  <CheckCircle className="h-4 w-4 text-[oklch(0.696_0.17_162.48)] mr-2" />
+                  <CheckCircle className="h-4 w-4 text-chart-2 mr-2" />
                   Subscription plans launching soon.{" "}
                 </div>
               </div>
             </div>
             <div className="relative">
-              <div className="bg-[oklch(0.205_0_0)] rounded-2xl shadow-2xl p-6 transform rotate-3 hover:rotate-0 transition-transform duration-300 border border-[oklch(1_0_0/0.1)]">
-                <div className="bg-gradient-to-r from-[oklch(0.488_0.243_264.376)] to-[oklch(0.627_0.265_303.9)] rounded-lg p-4 mb-4">
-                  <div className="flex justify-between items-center text-[oklch(0.985_0_0)]">
+              <div className="bg-card rounded-2xl shadow-2xl p-6 transform rotate-3 hover:rotate-0 transition-transform duration-300 border border-border">
+                <div className="bg-gradient-to-r from-chart-1 to-chart-4 rounded-lg p-4 mb-4">
+                  <div className="flex justify-between items-center text-primary-foreground">
                     <h3 className="font-semibold">Invoice #INV-001</h3>
                     <Badge
                       variant="secondary"
-                      className="bg-[oklch(0.696_0.17_162.48)] text-[oklch(0.985_0_0)]"
+                      className="bg-chart-2 text-primary-foreground"
                     >
                       Paid
                     </Badge>
@@ -240,20 +240,20 @@ const Home = () => {
                 </div>
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-[oklch(0.708_0_0)]">Amount:</span>
-                    <span className="font-semibold text-[oklch(0.985_0_0)]">
+                    <span className="text-muted-foreground">Amount:</span>
+                    <span className="font-semibold text-foreground">
                       $2,500.00
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[oklch(0.708_0_0)]">Due Date:</span>
-                    <span className="font-semibold text-[oklch(0.985_0_0)]">
+                    <span className="text-muted-foreground">Due Date:</span>
+                    <span className="font-semibold text-foreground">
                       Jan 15, 2024
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[oklch(0.708_0_0)]">Client:</span>
-                    <span className="font-semibold text-[oklch(0.985_0_0)]">
+                    <span className="text-muted-foreground">Client:</span>
+                    <span className="font-semibold text-foreground">
                       Acme Corp
                     </span>
                   </div>
@@ -264,13 +264,13 @@ const Home = () => {
         </div>
       </section>
 
-      <section id="features" className="py-20 bg-[oklch(0.269_0_0)]">
+      <section id="features" className="py-20 bg-muted">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[oklch(0.985_0_0)] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
               Everything you need to manage invoices
             </h2>
-            <p className="text-xl text-[oklch(0.708_0_0)] max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Powerful features designed to streamline your billing process and
               help you get paid faster.
             </p>
@@ -279,18 +279,18 @@ const Home = () => {
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="group hover:shadow-lg transition-shadow duration-300 border-0 bg-[oklch(0.205_0_0)] backdrop-blur-sm"
+                className="group hover:shadow-lg transition-shadow duration-300 border-0 bg-card backdrop-blur-sm"
               >
                 <CardHeader>
                   <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
                   </div>
-                  <CardTitle className="text-xl text-[oklch(0.985_0_0)]">
+                  <CardTitle className="text-xl text-foreground">
                     {feature.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base leading-relaxed text-[oklch(0.708_0_0)]">
+                  <CardDescription className="text-base leading-relaxed text-muted-foreground">
                     {feature.description}
                   </CardDescription>
                 </CardContent>
@@ -300,41 +300,38 @@ const Home = () => {
         </div>
       </section>
 
-      <section id="testimonials" className="py-20 bg-[oklch(0.205_0_0)]">
+      <section id="testimonials" className="py-20 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[oklch(0.985_0_0)] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
               Loved by businesses worldwide
             </h2>
-            <p className="text-xl text-[oklch(0.708_0_0)]">
+            <p className="text-xl text-muted-foreground">
               See what our customers have to say about their experience
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card
-                key={index}
-                className="border-0 bg-[oklch(0.269_0_0)] backdrop-blur-sm"
-              >
+              <Card key={index} className="border-0 bg-muted backdrop-blur-sm">
                 <CardHeader>
                   <div className="flex items-center space-x-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star
                         key={i}
-                        className="h-4 w-4 fill-[oklch(0.769_0.188_70.08)] text-[oklch(0.769_0.188_70.08)]"
+                        className="h-4 w-4 fill-chart-3 text-chart-3"
                       />
                     ))}
                   </div>
-                  <CardDescription className="text-base italic leading-relaxed text-[oklch(0.708_0_0)]">
+                  <CardDescription className="text-base italic leading-relaxed text-muted-foreground">
                     "{testimonial.content}"
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div>
-                    <p className="font-semibold text-[oklch(0.985_0_0)]">
+                    <p className="font-semibold text-foreground">
                       {testimonial.name}
                     </p>
-                    <p className="text-sm text-[oklch(0.708_0_0)]">
+                    <p className="text-sm text-muted-foreground">
                       {testimonial.role}
                     </p>
                   </div>
@@ -345,12 +342,12 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-[oklch(0.269_0_0)]">
+      <section className="py-20 bg-muted">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[oklch(0.985_0_0)] mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
             Ready to streamline your invoicing?
           </h2>
-          <p className="text-xl text-[oklch(0.708_0_0)] mb-8">
+          <p className="text-xl text-muted-foreground mb-8">
             Join thousands of businesses who have already transformed their
             billing process with our platform.
           </p>

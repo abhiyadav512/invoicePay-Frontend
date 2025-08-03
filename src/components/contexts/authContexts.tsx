@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useGetProfile } from "../../apis/auth/useAuth";
 import { LogoutUser } from "../../apis/auth/authApi";
+import { axiosInstance } from "../../lib/axiosInstance";
 
 interface User {
   id: string;
@@ -110,9 +111,13 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const logout = async () => {
     try {
       await LogoutUser();
+      setUser(null);
+      delete axiosInstance.defaults.headers.common["Authorization"];
     } catch (err) {
       console.error("Logout error:", err);
+      setUser(null);
     } finally {
+      delete axiosInstance.defaults.headers.common["Authorization"];
       setUser(null);
     }
   };

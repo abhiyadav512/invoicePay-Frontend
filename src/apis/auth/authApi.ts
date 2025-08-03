@@ -28,10 +28,10 @@ export const RegisterUser = async (
   return response.data;
 };
 
-export const LogoutUser = async (): Promise<UserProfile> => {
+export const LogoutUser = async (): Promise<any> => {
   const response = await axiosInstance.post("/user/auth/logout");
   // console.log("data", response.data);
-  return response.data.user;
+  return response.data;
 };
 
 export const verifyOtp = async (
